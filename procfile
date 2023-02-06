@@ -1,3 +1,3 @@
-mv example.env .env
-poetry install
-poetry run python bot.py
+worker:mv example.env .env
+worker: poetry install
+worker: poetry run python bot.py
