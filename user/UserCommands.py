@@ -10,7 +10,7 @@ class User(app_commands.Group):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    @app_commands.command(name="stats", description="Shows your stats on MultiLiveQueue")
+    @app_commands.command(name="stats", description="Mostra as tuas estatisticas do pareamento customizado")
     async def stats(self, ctx):
         await ctx.response.defer()
         username = ctx.user.name + "#" + ctx.user.discriminator
@@ -23,32 +23,32 @@ class User(app_commands.Group):
         embed = Embed(title=f"📊 {username} ranked stats!", color=0x64e4f5)
         file = File("./assets/Marvin.png")
         embed.set_thumbnail(url="attachment://Marvin.png")
-        embed.add_field(name="In-game", value=user.in_game_username, inline=False)
-        embed.add_field(name="⚔️ Played", value=user.matches_played, inline=True)
-        embed.add_field(name="✅ Won", value=user.matches_won, inline=True)
-        embed.add_field(name="😬 Winrate", value=f"{winrate:.2f}%", inline=True)
-        embed.add_field(name="❌ Multiplier", value=f"{user.winstreak_multiplier:.2f}", inline=True)
-        embed.add_field(name="🏅 Ranking", value=user.ranking, inline=True)
-        embed.add_field(name="💯 Points", value=f"{user.ranking_points:.2f}", inline=True)
+        embed.add_field(name="Nome no jogo", value=user.in_game_username, inline=False)
+        embed.add_field(name="⚔️ Jogadas", value=user.matches_played, inline=True)
+        embed.add_field(name="✅ vencidas", value=user.matches_won, inline=True)
+        embed.add_field(name="😬 MMR (Taxa de vitória)", value=f"{winrate:.2f}%", inline=True)
+        embed.add_field(name="❌ Multiplicador", value=f"{user.winstreak_multiplier:.2f}", inline=True)
+        embed.add_field(name="🏅 Rank", value=user.ranking, inline=True)
+        embed.add_field(name="💯 Pontos", value=f"{user.ranking_points:.2f}", inline=True)
         await ctx.followup.send(file=file, embed=embed)
     
-    @app_commands.command(name="rank", description="Shows your rank")
+    @app_commands.command(name="rank", description="Mostra o teu rank")
     async def rank(self, ctx):
         user = UserController(ctx.user.name + "#" + ctx.user.discriminator)
         await ctx.response.send_message(
-            f"{user.username} is rank {user.ranking} with {user.ranking_points} ranking points."
+            f"{user.username} tem o rank {user.ranking} com {user.ranking_points} pontos."
         )
 
-    @app_commands.command(name="ingame", description="Sets your in-game username")
+    @app_commands.command(name="nick", description="Coloca aqui o teu nick da conta da warner bros")
     async def ingame(self, ctx, ingame_username: str):
         user = UserController(ctx.user.name + "#" + ctx.user.discriminator)
         user.add_ingame_username(ingame_username)
-        await ctx.response.send_message(f"Your in-game username is now {ingame_username}.")
+        await ctx.response.send_message(f"O teu nick em jogo é {ingame_username}.")
     
-    @app_commands.command(name="muliversus", description="Shows your Muliversus stats")
+    @app_commands.command(name="estatisticas", description="Mostra as tuas estatisticas no multiversus")
     async def muliversus(self, ctx):
         user = UserController(ctx.user.name + "#" + ctx.user.discriminator)
         await ctx.response.send_message(
-            f"https://muliversus.plsergent.xyz/{user.in_game_username}"
+            f"Aqui estão as tuas estatisticas https://muliversus.plsergent.xyz/{user.in_game_username}"
         )
         
