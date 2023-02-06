@@ -16,16 +16,16 @@ intents.members = True
 client = discord.Client(intents=intents)
 tree = app_commands.CommandTree(client)
 
-@app_commands.command(name="help", description="Help command")
+@app_commands.command(name="ajuda", description="Comando de ajuda")
 async def help(ctx):
     await ctx.response.defer(ephemeral=True)
-    embed = Embed(title=f"Help!! ℹ️", description="Simple steps to start using the bot", color=0x64e4f5)
+    embed = Embed(title=f"ajuda!!", description="Como configurar o bot", color=0x64e4f5)
     file = File("./assets/Marvin.png")
     embed.set_thumbnail(url="attachment://Marvin.png")
-    embed.add_field(name="1. User", value="/user ingame <your-username>", inline=False)
-    embed.add_field(name="2. Queue", value="/queue casual", inline=False)
-    embed.add_field(name="3. Report match", value="/match report win 4-2", inline=False)
-    embed.add_field(name="4. Check your stats", value="/user stats", inline=False)
+    embed.add_field(name="1. Usuário", value="/user ingame <your-username>", inline=False)
+    embed.add_field(name="2. Iniciar modo ranqueado", value="/queue casual", inline=False)
+    embed.add_field(name="3. Dar os resultados da partida", value="/match report win 4-2", inline=False)
+    embed.add_field(name="4. Verifica as tuas estatisticas", value="/user stats", inline=False)
     embed.add_field(name="Full doc:", value="https://pl-sergent.gitbook.io/multilivequeue/", inline=False)
     await ctx.followup.send(file=file, embed=embed)
 
@@ -38,6 +38,6 @@ async def on_ready():
     tree.add_command(Match(client))
     tree.add_command(help)
     await tree.sync()
-    print("Bot is ready!")
+    print("Bot online!")
 
 client.run(os.getenv('TOKEN'))
