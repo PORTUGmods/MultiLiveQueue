@@ -84,9 +84,8 @@ The main command is to report the result of the match. This can be done by the w
 
 {% code title="report match if you lost" %}
 ```
-/match report loss 2-4
+/match report loss 2-4ssss
 ```
 {% endcode %}
 
 More about the match here: [Broken link](broken-reference "mention")
-a
